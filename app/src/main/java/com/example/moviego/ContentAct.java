@@ -2,17 +2,17 @@ package com.example.moviego;
 
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moviego.model.Articles;
 import com.example.moviego.model.NewsResponse;
@@ -41,6 +41,8 @@ public class ContentAct extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        RetrofitCl.clearClient();
+
         return inflater.inflate(R.layout.fragment_content, container, false);
     }
 
@@ -52,6 +54,7 @@ public class ContentAct extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.bebas);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(newsAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
         API moviedetails = RetrofitCl.getRetrofit(Const.apinews).create(API.class);
         final Call<NewsResponse> cMovie = moviedetails.News("id", "entertainment", Const.apiken);

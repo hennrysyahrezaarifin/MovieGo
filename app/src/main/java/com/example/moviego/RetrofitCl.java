@@ -38,6 +38,11 @@ public  static Retrofit getClient(String url) {
 private static OkHttpClient okHttpClient () {
    return new OkHttpClient.Builder().addInterceptor(new CustomInterceptor()).build();
 }
+
+    public static void clearClient() {
+        retrofit = null;
+    }
+
 private static class CustomInterceptor implements Interceptor {
 
     @NotNull

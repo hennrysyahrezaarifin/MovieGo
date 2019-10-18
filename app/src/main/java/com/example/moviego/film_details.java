@@ -2,17 +2,16 @@ package com.example.moviego;
 
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.moviego.model.MovieResponse;
 import com.example.moviego.model.Results;
@@ -48,6 +47,8 @@ public class film_details extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        RetrofitCl.clearClient();
+
         final MovieAdapter adapter = new MovieAdapter(requireContext(), movie);
         RecyclerView recyclerView = view.findViewById(R.id.details);
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(),3));
@@ -58,6 +59,7 @@ public class film_details extends Fragment {
         cMovie.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                Log.d("ROWITS", "onResponse: "+response.body());
                 if (response.isSuccessful()){
                     movie.addAll(response.body().getResults());
                     adapter.notifyDataSetChanged();
