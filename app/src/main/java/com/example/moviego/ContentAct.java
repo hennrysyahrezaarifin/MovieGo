@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moviego.model.Articles;
+import com.example.moviego.model.DataNews;
 import com.example.moviego.model.NewsResponse;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class ContentAct extends Fragment {
-    ArrayList<Articles> newsList = new ArrayList<>();
+    ArrayList<DataNews.Articles> newsList = new ArrayList<>();
 
 
     public ContentAct() {
@@ -57,10 +58,10 @@ public class ContentAct extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
         API moviedetails = RetrofitCl.getRetrofit(Const.apinews).create(API.class);
-        final Call<NewsResponse> cMovie = moviedetails.News("id", "entertainment", Const.apiken);
-        cMovie.enqueue(new Callback<NewsResponse>() {
+        final Call<DataNews> cMovie = moviedetails.News("id", "entertainment", Const.apiken);
+        cMovie.enqueue(new Callback<DataNews>() {
             @Override
-            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+            public void onResponse(Call<DataNews> call, Response<DataNews> response) {
                 if (response.isSuccessful()) {
                     newsList.addAll(response.body().getArticles());
                     newsAdapter.notifyDataSetChanged();
@@ -69,7 +70,7 @@ public class ContentAct extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<NewsResponse> call, Throwable t) {
+            public void onFailure(Call<DataNews> call, Throwable t) {
                 Log.d("ROWITS", "onFailure: "+t.getLocalizedMessage());
             }
         });

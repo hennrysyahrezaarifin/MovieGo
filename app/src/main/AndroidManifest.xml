@@ -11,9 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ForgotPass"></activity>
-        <activity android:name=".MainActivity" >
-        </activity>
+        <activity android:name=".News"></activity>
+        <activity android:name=".Commentactivity" />
+        <activity android:name=".Detail" />
+        <activity android:name=".ForgotPass" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".SplashScreen">
             <intent-filter>
@@ -27,7 +29,6 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.film_menu:
                         if (savedInstanceState == null) {
                             getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.container, film_details.newIns())
+                                    .replace(R.id.container, Movielist.newIns())
                                     .commit();
                         }
                         return true;
